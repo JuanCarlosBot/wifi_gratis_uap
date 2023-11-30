@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ejemplo de API con JavaScript</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="miFormulario">
+        <label for="usuario">Usuario:</label>
+        <input type="text" id="usuario" name="usuario" value="31027" required><br>
+        <label for="clave">Clave:</label>
+        <input type="password" id="clave" name="clave" value="31027n0uS2" required><br>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // URL de la API
+        const apiUrl = "http://181.115.188.250:9993/v1/service/api/3e958d74203b465abf8ee8b253cce422";
+
+        // Manejo del formulario
+        $("#miFormulario").submit(function (event) {
+            event.preventDefault();
+
+            // Obtener valores del formulario
+            const usuario = $("#usuario").val();
+            const clave = $("#clave").val();
+
+            // Encabezados personalizados
+            const headers = {
+                "x-api-key": "key e73b1991c59a67fe182524e4d12da556136ced8a9da310c3af4c4efbde804a10"
+            };
+
+            // Datos a enviar en formato JSON
+            const data = {
+                usuario: usuario,
+                clave: clave
+            };
+
+            // Realizar solicitud POST a la API
+            $.ajax({
+                url: apiUrl,
+                type: "POST",
+                headers: headers,
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (response) {
+                    // Manejar la respuesta de la API
+                    $("#resultado").html("Respuesta de la API: " + JSON.stringify(response));
+                },
+                error: function (error) {
+                    // Manejar errores de la API
+                    $("#resultado").html("Error de la API: " + JSON.stringify(error));
+                }
+            });
+        });
+    </script>
+</body>
+</html>
