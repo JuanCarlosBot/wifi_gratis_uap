@@ -67,7 +67,7 @@ public class APIEstudiantesControllers {
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
 
         ResponseEntity<String> response = restTemplate.postForEntity(urlSolicitudInterna, requestEntity, String.class);
-
+        System.out.println(response.toString());
         // Puedes procesar la respuesta y devolverla como sea necesario
         return response;
     }
